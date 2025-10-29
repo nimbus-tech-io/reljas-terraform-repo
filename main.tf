@@ -1,8 +1,10 @@
 terraform {
+  required_version = ">= 1.5.0"
+  
   required_providers {
     github = {
       source  = "integrations/github"
-      version = ">= 4.0.0"
+      version = "~> 6.0"
     }
     aws = {
         source = "hashicorp/aws"
@@ -12,19 +14,9 @@ terraform {
 }
 
 provider "github" {
-  owner = data.aws_ssm_parameter.github_owner.value
-  token = data.aws_ssm_parameter.github_pat.value
+  owner = var.github_owner
 }
 
 provider "aws"{
     region = "eu-central-1"
-}
-
-data "aws_ssm_parameter" "github_pat" {
-  name            = "/reljas-terraform-repo/github_pat"
-  with_decryption = true
-}
-
-data "aws_ssm_parameter" "github_owner" {
-  name = "/reljas-terraform-repo/github_owner"
 }

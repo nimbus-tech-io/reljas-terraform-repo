@@ -27,13 +27,13 @@ variable "aws_secret_access_key" {
   sensitive   = true
 }
 
-# variable "github_owner" {
-#  description = "GitHub username or organization that will own the repo"
-#  type        = string
-#}
+ variable "github_owner" {
+  description = "GitHub username or organization that will own the repo"
+  type        = string
+}
 
-# variable "github_pat" {
-#   description = "GitHub Personal Access Token"
-#   type        = string
-#   sensitive   = true
-# }
+variable "repo_secrets_ssm" {
+  description = "Map of GitHub Actions secret name => SSM parameter name"
+  type        = map(string)
+  default     = {}
+}
